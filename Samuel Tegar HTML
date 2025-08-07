@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Tegar - Designer & Product Design Story</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Global Variables & Base Styles */
+        :root {
+            /* Original Palette */
+            --primary: #6c5ce7; /* Deep Purple */
+            --secondary: #ff7675; /* Coral Red */
+            --accent: #00cec9; /* Turquoise */
+            --light-bg: #fdfdfd; /* Near White */
+            --dark-text: #2d3436; /* Dark Gray */
+            --light-gray: #e8f0f7; /* Soft Blue-Gray */
+            --medium-gray: #636e72; /* Medium Gray */
+            --gradient-start: #a29bfe; /* Lighter Purple */
+            --gradient-end: #6c5ce7; /* Deep Purple */
+            --bubble-color-1: rgba(178, 201, 255, 0.1);
+            --bubble-color-2: rgba(255, 189, 178, 0.15);
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --shadow-strong: rgba(0, 0, 0, 0.25);
+            --popup-bg: #ffeaa7; /* Light Yellow for paper */
+            --popup-border: #fdcb6e; /* Darker Yellow for paper border */
+
+            /* New VR Theme Colors (kept some for consistency in gradients/shapes) */
+            --vr-purple-dark: #4A00B7; /* Used for global background */
+            --vr-purple-light: #7E2FFF; /* Used for introduction gradient */
+            --vr-pink-light: #FF5C9D; /* Used for some shapes */
+            --vr-blue-light: #5CE1FF; /* Used for some shapes */
+            --vr-text-white: #FFFFFF;
+            --vr-nav-bg: rgba(255, 255, 255, 0.1); /* Nav background */
+        }
+    
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+            position: relative;
+            perspective: 1px; /* For parallax on body scroll */
+            transform-style: preserve-3d;
+        }
+            .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-top: 40px;
+            z-index: 2;
+        }
+        .social-icon {
+            font-size: 2.2rem;
+            color: var(--vr-text-white); /* White color from your variable */
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: var(--accent); /* Change color on hover */
+        }
+        /* Specific social icon colors (optional, if you want brand colors) */
+        .social-icon.instagram:hover { color: #E1306C; }
+        .social-icon.behance:hover { color: #1769FF; }
+        .social-icon.facebook:hover { color: #1877F2; }
+
+
+             .social-icons {
+                margin-top: 30px;
+                gap: 20px;
+            }
+            .social-icon {
+                font-size: 1.8rem; /* Smaller social icons */
+            }
+
+        /* --- Global Parallax Background & Decorative Elements (Applies to whole page) --- */
+        .global-background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2; /* Deeper than content */
+            pointer-events: none;
+            background: var(--vr-purple-dark); /* Dark purple background */
+        }
+
+        .global-background-effects::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--vr-purple-dark) 0%, #3a0090 100%); /* Adjusted gradient */
+            transform: translateZ(-1px) scale(2); /* Deeper layer, scales larger */
+        }
+
+        /* Animated Shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.25; /* Increased opacity for visibility */
+            filter: blur(50px); /* Slightly more blur */
+            animation: moveShape 20s infinite ease-in-out alternate;
+            z-index: -1; /* Above parallax-bg, below content */
+            transform: translateZ(-0.5px) scale(1.5); /* Closer layer, scales less */
+        }
+        .shape.s1 { background-color: var(--vr-blue-light); width: 350px; height: 350px; top: 10%; left: -5%; animation-delay: 0s; }
+        .shape.s2 { background-color: var(--vr-pink-light); width: 450px; height: 450px; bottom: 15%; right: -10%; animation-delay: 5s; }
+        .shape.s3 { background-color: var(--vr-purple-light); width: 250px; height: 250px; top: 40%; left: 60%; animation-delay: 10s; }
+
+        @keyframes moveShape {
+            0% { transform: translate(0, 0) scale(1.5); }
+            50% { transform: translate(30px, 50px) scale(1.6); }
+            100% { transform: translate(0, 0) scale(1.5); }
+        }
+
+        /* Paper Plane Elements */
+        .paper-plane {
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0.9;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%, 0% 50%, 20% 50%, 10% 40%, 10% 60%);
+            z-index: 0; /* Ensures they are above global background effects */
+        }
+        .paper-plane.p1 { width: 60px; height: 30px; top: 15%; left: -10%; background-color: rgba(255, 255, 255, 0.8); animation: flyPaperPlane 20s infinite linear; --start-x: -10%; --start-y: 15vh; --end-x: 110%; --plane-z: -0.01px; }
+        .paper-plane.p2 { width: 70px; height: 35px; top: 40%; right: -10%; background-color: rgba(200, 220, 255, 0.8); animation: flyPaperPlane 25s infinite linear; --start-x: 110%; --start-y: 40vh; --end-x: -10%; --plane-z: -0.02px; }
+        .paper-plane.p3 { width: 80px; height: 40px; bottom: 20%; left: -15%; background-color: rgba(255, 200, 200, 0.8); animation: flyPaperPlane 18s infinite linear; --start-x: -15%; --start-y: 80vh; --end-x: 115%; --plane-z: -0.05px; }
+
+        @keyframes flyPaperPlane {
+            0% { transform: translateX(calc(var(--start-x) + var(--offset-x, 0px))) translateY(calc(var(--start-y) + var(--offset-y, 0px))) translateZ(var(--plane-z)); }
+            50% { transform: translateX(calc(var(--end-x) + var(--offset-x, 0px))) translateY(calc(var(--start-y) + var(--offset-y, 20px))) translateZ(var(--plane-z)); }
+            100% { transform: translateX(calc(var(--start-x) + var(--offset-x, 0px))) translateY(calc(var(--start-y) + var(--offset-y, 0px))) translateZ(var(--plane-z)); }
+        }
+
+        /* Ensure full width sections disregard page-content-wrapper's max-width when needed */
+        .full-width-section {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            box-sizing: border-box; /* Include padding in the width calculation */
+        }
+
+
+        /* --- Introduction Section (now the first main content section) --- */
+        .introduction-section {
+            background: linear-gradient(135deg, var(--vr-purple-light) 0%, var(--vr-purple-dark) 100%); /* Updated gradient */
+            color: var(--vr-text-white);
+            padding: 120px 20px 80px 20px; /* Increased top padding for nav */
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: flex;
+            flex-direction: column; /* Changed to column for internal content flow */
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            margin-top: 0; /* Remove top margin, it's the first section now */
+        }
+        .introduction-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 8s infinite linear;
+            z-index: -1;
+        }
+
+        /* Navigation within Introduction */
+        .intro-nav {
+            position: absolute;
+            top: 30px;
+            width: calc(100% - 60px);
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--vr-nav-bg);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .intro-nav .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--vr-text-white);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .intro-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+        }
+        .intro-nav li a {
+            color: var(--vr-text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .intro-nav li a:hover {
+            color: var(--vr-blue-light);
+            transform: translateY(-2px);
+        }
+        .intro-nav .search-icon {
+            font-size: 1.5rem;
+            color: var(--vr-text-white);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .intro-nav .search-icon:hover {
+            color: var(--vr-pink-light);
+        }
+
+        .intro-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            max-width: 1000px;
+            width: 100%;
+            gap: 40px;
+            padding: 0 20px;
+            z-index: 2; /* Ensure content is above ::before */
+            margin-top: 40px; /* Space between nav and content */
+        }
+        .intro-text, .intro-image {
+            flex: 1;
+            padding: 20px;
+        }
+        .intro-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        .intro-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        .intro-image img:hover {
+            transform: scale(1.03);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-top: 40px;
+            z-index: 2;
+        }
+        .social-icon {
+            font-size: 2.2rem;
+            color: var(--vr-text-white);
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: var(--accent); /* Change color on hover */
+        }
+        /* Specific social icon colors (optional, if you want brand colors) */
+        .social-icon.instagram:hover { color: #E1306C; }
+        .social-icon.behance:hover { color: #1769FF; }
+        .social-icon.facebook:hover { color: #1877F2; }
+
+
+        @media (max-width: 768px) {
+            .introduction-section {
+                padding: 100px 15px 60px 15px; /* Adjusted padding for smaller screens */
+                min-height: auto;
+            }
+            .intro-nav {
+                flex-direction: column;
+                padding: 10px 15px;
+                top: 15px;
+                width: calc(100% - 30px);
+            }
+            .intro-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 10px;
+            }
+            .intro-nav li a {
+                font-size: 0.9rem;
+            }
+            .intro-nav .search-icon {
+                display: none; /* Hide search icon on small screens */
+            }
+            .intro-content {
+                flex-direction: column;
+                gap: 30px;
+                padding: 0 20px;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .intro-text {
+                text-align: center;
+            }
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+            .intro-text p {
+                font-size: 1rem;
+            }
+            .social-icons {
+                margin-top: 30px;
+                gap: 20px;
+            }
+            .social-icon {
+                font-size: 1.8rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .intro-text h2 {
+                font-size: 1.8rem;
+            }
+            .intro-text p {
+                font-size: 0.9rem;
+            }
+            .social-icons {
+                gap: 15px;
+            }
+            .social-icon {
+                font-size: 1.5rem;
+            }
+        }
+
+
+        /* --- Main Content Container (for story sections) --- */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background-color: transparent;
+        }
+
+        /* --- Header (for story content - adjusted to be within main-content) --- */
+        .story-header { /* Renamed from .header to avoid conflict */
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 60px; /* Standard margin */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            /* Removed transform and opacity transitions for parallax effect */
+            overflow: hidden;
+            isolation: isolate;
+            margin-top: 60px; /* Space between sections */
+        }
+        /* .story-header.hidden removed as the effect is no longer desired */
+
+        .story-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 8s infinite linear;
+            z-index: -1;
+        }
+        .story-header h1 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 5px 10px rgba(0,0,0,0.4);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 0.05em;
+        }
+        .story-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            margin-top: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+
+        /* --- Story Section --- */
+        .story-section {
+            background: white;
+            padding: 40px;
+            margin: 40px auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            position: relative;
+            opacity: 0;
+            transform: translateY(80px) rotateX(5deg);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            max-width: 800px;
+            border: 1px solid var(--light-gray);
+            transform-origin: center top;
+        }
+        .story-section.visible {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+        .story-section:nth-child(even) {
+            transform: translateY(80px) rotateX(5deg) translateX(30px);
+            transform-origin: center top;
+        }
+        .story-section:nth-child(even).visible {
+            transform: translateY(0) rotateX(0deg) translateX(0px);
+        }
+
+        .story-title {
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-top: 0;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--light-gray);
+            position: relative;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .story-title::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background: var(--secondary);
+            border-radius: 3px;
+            transition: width 0.6s ease, background 0.4s ease;
+        }
+        .story-section:hover .story-title::after {
+            width: 120px;
+            background: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.2em;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* --- Image Frame --- */
+        .image-frame {
+            border: 3px solid var(--light-gray);
+            padding: 20px;
+            background: white;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin: 40px 0;
+            text-align: center;
+            border-radius: 15px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+            max-width: 100%;
+            will-change: transform;
+            overflow: hidden;
+        }
+        .image-frame:hover {
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        .image-frame img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.5s ease-out;
+        }
+        .image-frame:hover img {
+            transform: scale(1.05);
+        }
+        .caption {
+            font-style: italic;
+            color: var(--medium-gray);
+            margin-top: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* --- Quote --- */
+        .quote {
+            font-style: italic;
+            background: linear-gradient(to right, rgba(108, 92, 231, 0.1) 0%, rgba(108, 92, 231, 0.02) 100%);
+            padding: 30px 35px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border-left: 8px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            font-size: 1.15rem;
+            color: var(--dark-text);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(0);
+        }
+        .quote:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .quote::before {
+            content: "“";
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(108, 92, 231, 0.15);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+            transform: rotate(-10deg);
+        }
+        .quote p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+            padding-left: 40px;
+            font-style: normal;
+        }
+        .quote:not(:has(p)) {
+            padding-left: 70px;
+        }
+
+        /* --- Learned Section (Key Learning Card) --- */
+        .key-learning {
+            perspective: 1200px;
+            margin: 50px 0;
+        }
+        .learning-card {
+            background: linear-gradient(145deg, white 0%, var(--light-gray) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px var(--shadow-medium);
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .learning-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            opacity: 0.15;
+            transform: scale(0);
+            transition: transform 0.6s ease-out;
+            z-index: 0;
+        }
+        .learning-card:hover::before {
+            transform: scale(1.2);
+        }
+        .learning-card:hover {
+            transform: rotateY(5deg) translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .learning-card h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+        .learning-card ul {
+            padding-left: 30px;
+            margin-bottom: 0;
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+        .learning-card li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+        .learning-card li::before {
+            content: '✨';
+            position: absolute;
+            left: -30px;
+            color: var(--secondary);
+            font-size: 1em;
+            top: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 50%, var(--secondary) 50%);
+            background-size: 100% 200%;
+            background-position: 100% 100%;
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--dark-text);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+        .highlight:hover {
+            background-position: 100% 0%;
+            color: white;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Pop-up Paper Styles --- */
+        .paper-popup-overlay {
+            position: fixed; /* Ensures it stays on top of the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100; /* Ensures it's above all other content */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .paper-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .paper-popup {
+            background-color: var(--popup-bg);
+            border: 2px solid var(--popup-border);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            transform: scale(0.8) translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-in-out;
+            will-change: transform, opacity;
+        }
+        .paper-popup-overlay.active .paper-popup {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .paper-popup h4 {
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .paper-popup p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--dark-text);
+            text-align: left;
+            margin-bottom: 0;
+        }
+        .popup-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .popup-close-btn:hover {
+            color: var(--secondary);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            margin: 60px auto 0 auto;
+            max-width: 900px;
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, white 0%, var(--light-gray) 100%);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateZ(20px); } /* Keep translateZ for 3D */
+            50% { transform: translateY(-15px) translateZ(20px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 5s infinite ease-in-out;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .story-section {
+                margin: 30px 15px;
+                padding: 30px;
+            }
+            .story-section:nth-child(even) {
+                transform: translateY(60px) rotateX(3deg) translateX(15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .introduction-section {
+                padding: 100px 15px 60px 15px; /* Adjusted padding for smaller screens */
+            }
+            .intro-nav {
+                flex-direction: column;
+                padding: 10px 15px;
+                top: 15px;
+                width: calc(100% - 30px);
+            }
+            .intro-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 10px;
+            }
+            .intro-nav li a {
+                font-size: 0.9rem;
+            }
+            .intro-nav .search-icon {
+                display: none; /* Hide search icon on small screens */
+            }
+            .intro-content {
+                flex-direction: column;
+                gap: 30px;
+                padding: 0 20px;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .intro-text {
+                text-align: center;
+            }
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+            .intro-text p {
+                font-size: 1rem;
+            }
+            .social-icons {
+                margin-top: 30px;
+                gap: 20px;
+            }
+            .social-icon {
+                font-size: 1.8rem;
+            }
+
+
+            .story-header {
+                padding: 60px 15px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                margin-bottom: 30px;
+            }
+            .story-header h1 {
+                font-size: 2.2rem;
+            }
+            .story-header p {
+                font-size: 1rem;
+            }
+            .story-section {
+                padding: 25px;
+                margin: 25px auto;
+                border-radius: 15px;
+                transform: translateY(40px) rotateX(0deg);
+            }
+            .story-section.visible {
+                transform: translateY(0) rotateX(0deg);
+            }
+            .story-section:nth-child(even),
+            .story-section:nth-child(even).visible {
+                transform: translateY(0) translateX(0);
+            }
+            .story-title {
+                font-size: 1.8rem;
+                padding-bottom: 8px;
+            }
+            .story-title::after {
+                height: 3px;
+                width: 50px;
+            }
+            .story-section:hover .story-title::after {
+                width: 80px;
+            }
+            .image-frame {
+                padding: 15px;
+                margin: 30px 0;
+                border-radius: 10px;
+                transform: none !important; /* Disable 3D transform on smaller screens */
+            }
+            .learning-card {
+                padding: 25px;
+                border-radius: 15px;
+                transform: none !important; /* Disable 3D transform on smaller screens */
+            }
+            .learning-card h3 {
+                font-size: 1.4rem;
+            }
+            .learning-card li {
+                font-size: 0.95rem;
+            }
+            .quote {
+                padding: 20px 25px;
+                margin: 30px 0;
+                font-size: 1rem;
+                border-left: 6px solid var(--primary);
+                transform: none !important; /* Disable 3D transform on smaller screens */
+            }
+            .quote::before {
+                font-size: 4rem;
+                top: 10px;
+                left: 15px;
+            }
+            .quote p {
+                padding-left: 30px;
+            }
+            .footer {
+                padding: 30px 15px;
+                margin: 40px 0 0 0; /* Adjust margin for smaller screens */
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+            .paper-plane {
+                width: 40px;
+                height: 20px;
+                animation-duration: 15s !important;
+                filter: blur(2px);
+            }
+            .paper-plane.p1 { --start-y: 10vh; }
+            .paper-plane.p2 { --start-y: 30vh; }
+            .paper-plane.p3 { --start-y: 70vh; }
+            .shape {
+                filter: blur(20px);
+                opacity: 0.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .introduction-section {
+                min-height: auto; /* Allow height to adjust */
+                padding: 40px 15px;
+            }
+            .intro-text h2 {
+                font-size: 1.8rem;
+            }
+            .intro-text p {
+                font-size: 0.9rem;
+            }
+
+            .story-header h1 {
+                font-size: 1.8rem;
+            }
+            .story-header p {
+                font-size: 0.9rem;
+            }
+            .story-section {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            .story-title {
+                font-size: 1.4rem;
+            }
+            p {
+                font-size: 0.95rem;
+            }
+            .image-frame {
+                padding: 10px;
+                margin: 20px 0;
+            }
+            .caption {
+                font-size: 0.85rem;
+            }
+            .quote {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+            .quote::before {
+                font-size: 3rem;
+                top: 5px;
+                left: 10px;
+            }
+            .learning-card {
+                padding: 15px;
+            }
+            .learning-card h3 {
+                font-size: 1.1rem;
+            }
+            .learning-card li {
+                font-size: 0.9rem;
+            }
+            .highlight {
+                padding: 2px 4px;
+            }
+            .footer {
+                padding: 20px 10px;
+            }
+            .paper-plane {
+                display: none; /* Hide paper planes on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="global-background-effects">
+        <div class="shape s1"></div>
+        <div class="shape s2"></div>
+        <div class="shape s3"></div>
+        <div class="paper-plane p1"></div>
+        <div class="paper-plane p2"></div>
+        <div class="paper-plane p3"></div>
+    </div>
+
+    <section class="introduction-section full-width-section">
+        <nav class="intro-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Experiences</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="search-icon">&#128269;</div>
+        </nav>
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Hello, Nice to Meet you my name is Samuel Tegar!</h2>
+                <p>
+                    I am a designer from Indonesia with 3.5 years of experience. While I consider my skills quite solid, I do not yet classify myself as a senior or expert. The reason I am applying for the Product Designer position at Mailer<b>Lite </b>is because I want to further develop myself by learning and working alongside the Mailer<b>Lite</b> team. a team I greatly admire and aspire to join within a supportive group and a very enjoyable work environment.
+
+                    Since childhood, I have dreamed of becoming a designer because I want to solve other people’s problems. As a designer, I am very passionate about addressing complex problems through intuitive design and close collaboration. I believe the best solutions come from a deep understanding of user needs and strong teamwork among designers, engineers, and product managers. Sometimes, I have also worked with psychologists and multidisciplinary teams during internships and previous projects.
+                </p>
+            </div>
+            <div class="intro-image">
+                <img src="https://storage.mlcdn.com/account_image/1684132/PfaoPdUHjkyHbaKrABaVbJIFi8YrdXDN9peCjO1k.png" alt="Samuel Tegar Introduction Image">
+            </div>
+        </div>
+        <div class="social-icons">
+    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+    <!-- For Behance, use the image you provided -->
+    <a href="https://storage.mlcdn.com/account_image/1684132/epL4jJMqv882X0bwcnKmcPmSQPeXRx0WAvlZ2eGN.png" class="social-icon" target="_blank" rel="noopener noreferrer">
+        <img src="https://storage.mlcdn.com/account_image/1684132/epL4jJMqv882X0bwcnKmcPmSQPeXRx0WAvlZ2eGN.png" alt="Behance Logo" style="width:24px; height:24px; vertical-align:middle;">
+    </a>
+    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+</div>
+    </section>
+
+    <div class="main-content">
+        <div class="story-header">
+            <h1>Create Problem Solver Design with Collaboration</h1>
+            <p>My designer's journey through challenges, teamwork, and continuous learning in product development, with a focus on <span class="highlight" data-popup-title="Progressive Web Apps" data-popup-content="Progressive Web Apps (PWAs) are web applications that are regular web pages or websites, but can appear to the user like traditional native mobile applications. They blend the best of both web and native apps, offering offline capabilities, push notifications, and home screen installation, enhancing user experience and reach.">PWAs (progressive webapps)</span>, <span class="highlight" data-popup-title="Design Systems Explained" data-popup-content="A design system is a comprehensive set of standards, components, and guidelines that helps teams build digital products more efficiently and consistently. It includes everything from brand identity (colors, typography) to UI components (buttons, forms) and provides a single source of truth for design and development.">design systems</span>, and <span class="highlight" data-popup-title="Mobile App Development" data-popup-content="Mobile apps refer to software applications developed specifically for mobile devices such as smartphones and tablets. They can be native (built for a specific OS), hybrid (cross-platform with web tech), or web-based (running in a browser).">mobile apps</span>.</p>
+        </div>
+
+        <div class="story-section" id="section1">
+            <h2 class="story-title">How we collaborate with engineering and PM teams to create digital solutions</h2>
+            
+            <p>I still remember that day when i still was in the Government. The product manager came with a request: "We need a new wishlist feature, user engagement is declining!" We immediately got excited about designing beautiful components—heart icons, animations, drag-and-drop features. Two weeks of hard work went into it.</p>
+
+            <div class="image-frame floating">
+                <img src="https://storage.mlcdn.com/account_image/1684132/W9c8JUYZL7FSThxClEHZoV45IJEPLhcH6eA5rqfI.jpg" alt="Design Process">
+                <div class="caption">The initial design process illustration.</div>
+                <div class="caption">Image Source: Unsplash.com</div>
+            </div>
+            
+            <p>Because of it, as a designer i'm using a Design Thinking Method that from the method we should to know first about what the problem is? So we do the emphatized and for them we held a Meeting. And then during the presentation to the <span class="highlight" data-popup-title="Engineering Team Collaboration" data-popup-content="Effective collaboration with the engineering team means integrating designers early in the development cycle, sharing detailed specs, and holding regular sync-ups to ensure feasibility and smooth implementation.">engineering team</span>, a backend developer asked a crucial question: "? From the data I see, 70% of drop-offs occur before users even reach the product page." This was a significant wake-up call. Our <span class="highlight" data-popup-title="Collaboration with Software Engineers and Product Managers" data-popup-content="My collaboration approach involves constant communication, using tools like Figma for living documentation, conducting joint workshops, and embracing iterative feedback loops with both engineering and product management teams from ideation to launch.">collaboration with software engineers and product managers</span> truly began here.</p>
+            
+            <div class="key-learning">
+                <div class="learning-card">
+                    <h3>Key Learnings from the Revelation:</h3>
+                    <ul>
+                        <li>Always start with <span class="highlight" data-popup-title="Data-Driven Design" data-popup-content="Starting with actual data helps validate assumptions, identify real user pain points, and ensures design efforts are focused on solving the most impactful problems, rather than just aesthetic improvements.">Actual Data</span>, not assumptions.</li>
+                        <li>Invite <span class="highlight" data-popup-title="Stakeholder Inclusion" data-popup-content="Bringing all relevant stakeholders (developers, QA, marketing, legal) into the design process early on prevents costly rework, fosters shared understanding, and ensures alignment with business goals.">All Stakeholders</span> from the very beginning of the project.</li>
+                        <li>Practice asking <span class="highlight" data-popup-title="The 'Five Whys' Method" data-popup-content="The 'Five Whys' is an iterative interrogative technique used to explore the cause-and-effect relationships underlying a particular problem. By repeatedly asking 'Why?', you can peel back layers of symptoms to get to the root cause of an issue.">"Why?" at least 5 times</span> to truly get to the root of the problem.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="story-section" id="section2">
+            <h2 class="story-title">Collaborative Workshop Insights</h2>
+            
+            <p>Following this realization, a pivotal meeting was held again. It included two engineers, one <span class="highlight" data-popup-title="Product Manager Role" data-popup-content="A Product Manager is responsible for defining the 'what' and 'why' of a product, guiding its entire lifecycle from conception to launch and iteration. They act as the bridge between business, technology, and user experience.">Product Manager</span>, Two Designer include me and three actual users, all connected via Google Meet to not increase the budget. This early <span class="highlight" data-popup-title="User Research Integration" data-popup-content="User research is integrated throughout the design process to ensure decisions are user-centric. This involves understanding user behaviors, needs, and motivations through various methods, informing design choices and validating solutions.">user research</span> step was critical. The virtual whiteboard quickly filled with sticky notes bearing valuable insights. This is how <span class="highlight" data-popup-title="UX Research Methods Used" data-popup-content="We utilized qualitative UX research methods such as user interviews (to understand pain points and desires) and contextual inquiry (observing users in their natural environment) to gather rich, actionable insights directly from target users.">UX research methods</span>, such as user interviews and contextual inquiry, were incorporated:</p>
+            
+            <div class="quote pulse">
+                <p>"I want to be able to see my favorite products without having to log in first."</p>
+                <p>"Why does the wishlist button often get covered by pop-ups?"</p>
+                <p>"Can I get notifications when my favorite products are on sale?"</p>
+            </div>
+            
+            <div class="image-frame">
+                <img src="https://storage.mlcdn.com/account_image/1684132/nLiyUXmi5QaF3Fc7RPtOxiDIRgWfHo7BlozknYMJ.jpg" alt="Workshop Session">
+                <div class="caption">workshop session  illustration</div>
+                <div class="caption">Image Source: Unsplash.com</div>
+            </div>
+            
+            <p>After intensive brainstorming among the designers, users, and the product manager, a brilliant idea emerged: <i>"We can use local cache for wishlists, allowing users to save items without logging in. However, notifications can only be sent after a user logs in."</i> This approach balanced user convenience with technical feasibility.</p>
+        </div>
+
+        <div class="story-section" id="section3">
+            <h2 class="story-title">From Ideation to Polished Prototype</h2>
+            
+            <p>The first version of our interactive prototype was, frankly, a complete failure. Five out of seven user testers had significant trouble finding the wishlist button. But thanks to their quick and honest feedback, we were able to iterate and refine the design within just two days.</p>
+            
+            <p>To ensure we had the best solution, I suggested using **A/B Testing**. We simultaneously tested versions A and B on different user segments, meticulously collecting metrics. The result? The floating wishlist button in the lower right corner won hands down, boasting an impressive 80% engagement rate!</p>
+            
+            <div class="key-learning">
+                <div class="learning-card">
+                    <h3>Crucial Takeaways from Prototyping & Testing:</h3>
+                    <ul>
+                        <li><span class="highlight" data-popup-title="Interactive Prototypes" data-popup-content="Interactive prototypes allow for early user testing and feedback, uncovering usability issues before significant development investment. They are crucial for validating design concepts and iterating quickly.">Interactive Prototypes</span> are essential for uncovering unexpected UX issues early.</li>
+                        <li><span class="highlight" data-popup-title="A/B Testing Benefits" data-popup-content="A/B testing (or split testing) compares two versions of a webpage or app element to see which one performs better. It provides data-backed insights to optimize user experience and conversion rates.">A/B Testing</span> provides data-backed solutions, moving beyond assumptions.</li>
+                        <li>A fast and cost-effective <span class="highlight" data-popup-title="Efficient Iteration Process" data-popup-content="An efficient iteration process in design emphasizes rapid prototyping, quick feedback loops, and a willingness to refine designs based on insights. This minimizes risk and saves valuable time and resources.">Iteration process</span> in the Design phase significantly saves budget later.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p>We initially thought our design task was complete. However, the <span class="highlight" data-popup-title="Engineering Team Collaboration - Clarification" data-popup-content="The engineering team relies on clear design specifications, including details on various states (loading, error, empty), edge cases (e.g., maximum items), and responsive behaviors for different screen sizes. This ensures accurate and efficient development.">Engineering Team</span> still needed critical clarifications on various states and behaviors:</p>
+            
+            <div class="quote">
+                <p>"What <span class="highlight" data-popup-title="Loading States in UI" data-popup-content="Loading states are crucial for user experience. They inform users that content is being retrieved, preventing frustration. Examples include spinners, skeleton screens, and progress bars.">Loading State</span> will we use for the wishlist?"</p>
+                <p>"What will happen if wishlist already reach for <span class="highlight" data-popup-title="Edge Cases in Design" data-popup-content="Designing for edge cases means considering how the UI/UX will behave under unusual or extreme conditions, such as a very long list, an empty state, or an error state, to ensure robustness.">100 items</span>?"</p>
+                <p>"How Behavior for this Design in <span class="highlight" data-popup-title="Designing for Ultra-Wide Screens" data-popup-content="Designing for ultra-wide screens requires careful consideration of content density, layout flow, and readability. Techniques include fluid layouts, centralizing content, or breaking elements into multiple columns.">Ultra Wide Screen</span>?"</p>
+            </div>
+            
+            <p>Our solution? We developed comprehensive <i>Living Documentation</i> directly within Figma, which eventually fed into our nascent <span class="highlight" data-popup-title="Establishing Design Systems" data-popup-content="Establishing a design system involves creating a centralized library of reusable UI components, patterns, and style guidelines. It ensures consistency, accelerates development, and improves collaboration across teams.">design systems</span> effort. This detailed document covered every edge case, interaction, and responsive behavior, serving as a single source of truth for both design and development. My expertise in <span class="highlight" data-popup-title="HTML and CSS Proficiency" data-popup-content="My proficiency in HTML and CSS allows me to understand the technical feasibility of designs, translate complex UI/UX concepts into clean code, and collaborate effectively with front-end developers, bridging the gap between design and implementation.">HTML and CSS</span> was invaluable in understanding implementation feasibility.</p>
+            
+            <div class="image-frame floating">
+                <img src="https://storage.mlcdn.com/account_image/1684132/uCkuV3kerqIUIqRnbdiVavZA02tve7YxAJWFDbVn.jpg" alt="Prototype Illustration">
+                <div class="caption">Prototyping illustration ensuring clarity.</div>
+                <div class="caption">Image Source: Unsplash.com - Amélie Mourichon</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This is my story as an Internship Designer Staff in the Creative Economic Government of my country. Got an exciting story about design-development collaboration? I'd love to hear it!</p>
+        <p>© 2025 Samuel Tegar | <a href="*|UNSUB|*">Unsubscribe</a></p>
+    </div>
+
+    <div class="paper-popup-overlay">
+        <div class="paper-popup">
+            <button class="popup-close-btn">&times;</button>
+            <h4 id="popup-title"></h4>
+            <p id="popup-content"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.story-section, .footer').forEach(element => {
+                observer.observe(element);
+            });
+
+            // Parallax effect for paper planes on scroll - now tied to global scroll
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                const planes = document.querySelectorAll('.paper-plane');
+                planes.forEach(plane => {
+                    const currentTransform = window.getComputedStyle(plane).transform;
+                    const matrix = new DOMMatrixReadOnly(currentTransform);
+                    const currentY = matrix.m42; 
+
+                    const planeZ = parseFloat(plane.style.getPropertyValue('--plane-z'));
+                    if (!isNaN(planeZ)) {
+                        const parallaxYOffset = scrollTop * planeZ * -500;
+                        const currentTranslateX = matrix.m41;
+                        const currentTranslateZ = matrix.m43;
+                        plane.style.transform = `translateX(${currentTranslateX}px) translateY(${parallaxYOffset}px) translateZ(${currentTranslateZ}px) ${plane.style.transform.replace(/translate[XYZ]\([^)]*\)/g, '').replace(/translateZ\([^)]+\)/g, '')}`;
+                    }
+                });
+            });
+
+
+            // Only enable 3D effects on larger screens for story elements
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.image-frame, .learning-card, .quote').forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const rotationY = (x - centerX) / 40;
+                        const rotationX = (centerY - y) / 40;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                    });
+                });
+            }
+
+            /* --- Pop-up Logic --- */
+            const popupOverlay = document.querySelector('.paper-popup-overlay');
+            const popupTitle = document.getElementById('popup-title');
+            const popupContent = document.getElementById('popup-content');
+            const closePopupBtn = document.querySelector('.popup-close-btn');
+            const highlights = document.querySelectorAll('.highlight');
+
+            highlights.forEach(highlight => {
+                highlight.addEventListener('click', function() {
+                    popupTitle.textContent = this.dataset.popupTitle || 'Information';
+                    popupContent.textContent = this.dataset.popupContent || 'No additional information available.';
+                    popupOverlay.classList.add('active');
+                });
+            });
+
+            closePopupBtn.addEventListener('click', () => {
+                popupOverlay.classList.remove('active');
+            });
+
+            popupOverlay.addEventListener('click', function(event) {
+                if (event.target === popupOverlay) {
+                    popupOverlay.classList.remove('active');
+                }
+            });
+        });
+    </script>
+   <audio autoplay loop>
+  <source src="your-rock-song.mp3" type="audio/mpeg">
+  <source src="your-rock-song.ogg" type="audio/ogg">
+  Browser Anda tidak mendukung elemen audio.
+</audio>
+</body>
+</html>
